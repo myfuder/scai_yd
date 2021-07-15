@@ -1,0 +1,17 @@
+<div class="flex-row-center" >
+    <div class="flex-row-center" style="width:1200px">
+        <div style="width:10%;border:1px solid #a5a5a5">
+            <li style="padding:20px 0;border-bottom:1px solid #a5a5a5" @click="active_li = ''">概述</li>
+            <router-link to="/edit/pic_type" class="menu-li" :class="{'active':active_li == 'pic_type'}" >类目管理</router-link>
+            <router-link to="/edit/picture" class="menu-li" :class="{'active':active_li == 'picture'}">素材管理</router-link>
+            <router-link to="/edit/banner" class="menu-li" :class="{'active':active_li == 'banner'}" >轮播图管理</router-link>
+<!--            <router-link to="/edit/buy" class="menu-li" :class="{'active':active_li == 'buy'}" >购买教程</router-link>-->
+<!--            <router-link to="/edit/down" class="menu-li" :class="{'active':active_li == 'down'}" >下载教程</router-link>-->
+        </div>
+        <div style="width:90%">
+            <p style="font-size:30px;font-weight: bold;text-align: center;border: 1px solid #a5a5a5">编辑</p>
+            <router-view v-if="active_li"  style="width:100%;"></router-view>
+            <div v-else>编辑内容</div>
+        </div>
+    </div>
+</div>

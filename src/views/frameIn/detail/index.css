@@ -1,0 +1,91 @@
+@media screen and (max-width: 960px) {
+  .header {
+    display: none;
+  }
+  .detail-con {
+    padding: 10px;
+    background: #F5F5F5;
+  }
+  .detail-con .img {
+    display: none;
+  }
+  .detail-con .avatar {
+    display: none;
+  }
+  .detail-con .price {
+    font-size: 20px;
+  }
+  .detail-con .banner {
+    display: none;
+  }
+  .detail-con .des {
+    text-align: start;
+  }
+  .detail-con .chat {
+    padding: 0 10px;
+    color: darkgreen;
+  }
+  .desc {
+    padding: 20px 0;
+  }
+  .mini-tuijian {
+    padding: 0 10px;
+  }
+}
+@media screen and (min-width: 960px) {
+  .detail-con {
+    display: flex;
+    align-items: center;
+    padding: 20px;
+    background: #F5F5F5;
+    height: 500px;
+  }
+  .detail-con .img {
+    width: 40%;
+    height: 100%;
+  }
+  .detail-con .avatar {
+    margin-right: 10px;
+  }
+  .detail-con .price {
+    font-size: 30px;
+  }
+  .detail-con .banner {
+    width: 100%;
+    margin-top: 20px;
+  }
+  .detail-con .mini-banner {
+    display: none;
+  }
+  .detail-con .des {
+    width: 60%;
+    padding: 0 40px;
+    text-align: start;
+  }
+  .detail-con .chat {
+    padding: 0 30px;
+    color: darkgreen;
+  }
+  .el-avatar img {
+    width: 100%;
+    height: auto;
+  }
+  .desc {
+    display: flex;
+    padding: 20px 0;
+  }
+  .desc .left {
+    width: 70%;
+    border-radius: 15px;
+    border: 1px solid #bae8b6;
+  }
+  .desc .right {
+    width: 30%;
+    border-radius: 15px;
+    border: 1px solid #bae8b6;
+  }
+  .header {
+    padding: 20px;
+  }
+}
+/*# sourceMappingURL=index.css.map */

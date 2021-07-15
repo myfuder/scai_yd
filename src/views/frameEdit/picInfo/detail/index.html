@@ -1,0 +1,67 @@
+<div>
+    <el-form ref="form" :model="form" label-width="80px" size="small" style="width:500px;text-align: left">
+        <el-form-item label="套图名称">
+            <el-input v-model="form.title"></el-input>
+        </el-form-item>
+        <el-form-item label="网盘编号">
+            <el-input v-model="form.wpno"></el-input>
+        </el-form-item>
+        <el-form-item label="缩略图">
+            <el-upload class="upload-demo" :limit="3" list-type="picture" :file-list="(form.thumbnail||[]).map((item,index) => {return {name:'img'+index,url:VUE_APP_BASE_URL+item}})" :on-error="uploadError" :on-success="uploadSuccess"
+                       show-file-list drag :action="VUE_APP_BASE_URL+'/v1/picture/fileUpload'" multiple>
+                <i class="el-icon-upload"></i>
+                <div class="el-upload__text">将文件拖到此处，或<em>点击上传</em></div>
+                <div class="el-upload__tip" slot="tip">只能上传jpg/png文件，且不超过500kb</div>
+            </el-upload>
+        </el-form-item>
+        <el-form-item label="图片数量">
+            <el-input v-model="form.picCount"></el-input>
+        </el-form-item>
+        <el-form-item label="视频数量">
+            <el-input v-model="form.videoCount"></el-input>
+        </el-form-item>
+        <el-form-item label="内存占用">
+            <el-input v-model="form.memory"></el-input>
+        </el-form-item>
+        <el-form-item label="售价">
+            <el-input v-model="form.price"></el-input>
+        </el-form-item>
+        <el-form-item label="产品分类">
+            <el-checkbox-group v-model="form.type">
+                <el-checkbox v-for="item in list" :label="item.name" name="type"></el-checkbox>
+                <el-button @click="editType" icon="el-icon-plus" type="info" circle style="margin-left:20px"></el-button>
+            </el-checkbox-group>
+        </el-form-item>
+        <el-form-item label="备注">
+            <el-input v-model="form.remarks"></el-input>
+        </el-form-item>
+        <el-form-item label="详情">
+            <!--            <el-input v-model="form.detailcontent"></el-input>-->
+            <div id="demo1"></div>
+        </el-form-item>
+        <el-form-item>
+            <el-button type="primary" @click="onSubmit">立即创建</el-button>
+            <el-button>取消</el-button>
+        </el-form-item>
+    </el-form>
+
+    <el-dialog title="新增分类" :visible.sync="dialogFormVisible">
+        <el-form :model="typeForm" label-width="80px" style="text-align: left">
+            <el-form-item label="类型名称">
+                <el-input style="width:300px;" v-model="typeForm.name"></el-input>
+            </el-form-item>
+            <el-form-item label="缩略图">
+                <el-upload class="upload-demo" :limit="1" list-type="picture" :on-error="uploadError" :on-success="uploadTypeSuccess"
+                           show-file-list drag :action="VUE_APP_BASE_URL+'/v1/picture/fileUpload'" multiple>
+                    <i class="el-icon-upload"></i>
+                    <div class="el-upload__text">将文件拖到此处，或<em>点击上传</em></div>
+                    <div class="el-upload__tip" slot="tip">只能上传jpg/png文件，且不超过500kb</div>
+                </el-upload>
+            </el-form-item>
+        </el-form>
+        <div slot="footer" class="dialog-footer">
+            <el-button @click="dialogFormVisible = false">取 消</el-button>
+            <el-button type="primary" @click="subType">确 定</el-button>
+        </div>
+    </el-dialog>
+</div>

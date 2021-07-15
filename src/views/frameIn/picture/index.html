@@ -1,0 +1,60 @@
+<div style="">
+    <div class="header flex-space-between" style="">
+        <div class="flex">
+            <h3>素材营地</h3>
+            <el-breadcrumb separator-class="el-icon-arrow-right" style="margin-left:40px;margin-top:10px;cursor: pointer">
+                <el-breadcrumb-item :to="{ path: '/' }">首页</el-breadcrumb-item>
+                <el-breadcrumb-item v-if="'search' != currText">{{currText}}</el-breadcrumb-item>
+            </el-breadcrumb>
+        </div>
+        <div class="flex-space-between" style="font-size: 14px;width:300px">
+            <el-link type="primary">登录</el-link>
+            <el-link type="success">加入我们</el-link>
+            <el-button round type="primary" size="medium " icon="el-icon-search">私人定制</el-button>
+        </div>
+    </div>
+    <div class="search-p" v-if="'search' == currText" style="">
+        <el-input  style="position:relative;" placeholder="请输入内容"
+                   prefix-icon="el-icon-search"
+                   v-model="input2">
+            <el-button slot="append" icon="el-icon-search" @click="bindInput"></el-button>
+        </el-input>
+    </div>
+    <el-row class="content" :gutter="20">
+        <el-col :span="6" v-for="item in list" >
+            <router-link :to="'/picture/detail/'+currText+'/'+item.id" style="text-decoration: none;display:block;height:100%;position:relative;margin-top:20px;cursor: pointer">
+                <el-image style="height:280px;width:100%" :src="item.thumbnail" fit="cover"></el-image>
+                <div style="text-align: start">
+                    <p style="color:#797979;font-size:16px;font-weight: 650;height:42px">{{item.title}}</p>
+                    <p class="" style="color:#666666;font-size:14px;margin-top:5px">
+                        <span style="font-size: 20px;color:#ff0000">￥</span><span style="font-size: 20px;margin-right:10px;color:#ff0000">{{item.price}}</span>
+                        <el-tag v-if="item.picCount" style="margin-right:10px;" round type="primary" size="medium">{{item.picCount+'张图'}}</el-tag>
+                        <el-tag v-if="item.videoCount" style="margin-right:10px;" round type="primary" size="medium">{{item.videoCount+'个视频'}}</el-tag>
+                    </p>
+                </div>
+            </router-link>
+        </el-col>
+    </el-row>
+    <el-row class="mini-content" :gutter="10">
+        <el-col :span="12" v-for="item in list" >
+            <router-link :to="'/picture/detail/'+currText+'/'+item.id" style="text-decoration: none;display:block;height:100%;position:relative;margin-top:10px;cursor: pointer">
+                <el-image style="height:150px;width:100%" :src="item.thumbnail" fit="cover"></el-image>
+                <div style="text-align: start">
+                    <p style="color:#797979;font-size:16px;font-weight: 650">{{item.title}}</p>
+                    <p class="flex" style="color:#666666;font-size:14px;margin-top:5px;height:32px">
+                        <span style="font-size: 14px;color:#ff0000">￥</span><span style="font-size: 16px;margin-right:5px;color:#ff0000">{{item.price}}</span>
+                        <el-tag v-if="item.picCount" style="margin-right:5px;" round type="primary" size="mini">{{item.picCount+'张图'}}</el-tag>
+                        <el-tag v-if="item.videoCount" style="margin-right:5px;" round type="primary" size="mini">{{item.videoCount+'个视频'}}</el-tag>
+                    </p>
+                </div>
+            </router-link>
+        </el-col>
+    </el-row>
+    <el-pagination style="padding:30px 0"
+        :hide-on-single-page="true"
+        :total="total"
+        :page-size="pageSize"
+        @current-change="handleCurrentChange"
+        layout="prev, pager, next">
+    </el-pagination>
+</div>

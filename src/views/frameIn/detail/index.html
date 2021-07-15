@@ -1,0 +1,96 @@
+<div>
+    <div class="header flex-space-between" style="">
+        <div class="flex">
+            <h3>素材营地</h3>
+            <el-breadcrumb separator-class="el-icon-arrow-right" style="margin-left:40px;margin-top:10px;cursor: pointer">
+                <el-breadcrumb-item :to="{ path: '/' }">首页</el-breadcrumb-item>
+                <el-breadcrumb-item v-if="'专区' != currText&&'search' != currText" :to="{ path: '/picture/list/'+currText }">{{currText}}</el-breadcrumb-item>
+                <el-breadcrumb-item :to="{ path: '/' }">{{picInfo.title}}</el-breadcrumb-item>
+            </el-breadcrumb>
+        </div>
+        <div class="flex-space-between" style="font-size: 14px;width:300px">
+            <el-link type="primary">登录</el-link>
+            <el-link type="success">加入我们</el-link>
+            <el-button round type="primary" size="medium" icon="el-icon-search">私人定制</el-button>
+        </div>
+    </div>
+    <div class="detail-con" style="">
+         <el-image class="img" style="" :src="currentImg" fit="cover"></el-image>
+        <div class="mini-banner">
+            <div class=" swiper-container">
+                <div class="swiper-wrapper">
+                    <div class="swiper-slide"  v-for="img in picInfo.thumbnail" :key="img">
+                        <el-image style="width:100%;height:100vw" :src="img" fit="cover"></el-image>
+                    </div>
+                </div>
+            </div>
+        </div>
+         <div class="des" style="">
+             <div class="flex">
+                 <el-avatar class="avatar" :size="60" :src="picInfo.thumbnail&&picInfo.thumbnail[0]"></el-avatar>
+                 <div style="text-align:start;font-size:14px;line-height:1.5;">
+                     <p>{{picInfo.title}}</p>
+                     <p class="" style="margin-right:40px;color:#ff0000;white-space:nowrap">
+                         <span style="font-size: 14px">￥</span><span class="price" style="">{{picInfo.price}}</span>
+                         <el-tag round type="primary" size="mini" icon="el-icon-picture-outline">{{picInfo.picCount}}张图片</el-tag>
+                         <el-tag round type="primary" size="mini" icon="el-icon-download">{{picInfo.videoCount}}个视频</el-tag>
+                     </p>
+                 </div>
+             </div>
+             <div class="banner between" style="">
+                 <el-image v-for="path in picInfo.thumbnail" @click="currentImg = path" style="width:30%;height: 200px;" :src="path" fit="cover"></el-image>
+             </div>
+             <p style="font-size:14px;margin-top:10px;white-space:nowrap">相册编号：{{picInfo.wpno}}</p>
+             <p v-if="picInfo.remarks" style="font-size:14px;margin-top:10px;color:#797979">
+                 备注：{{picInfo.remarks}}
+             </p>
+             <div class="chat flex " style="">
+                 <div class="flex-col-center" style="margin-top:10px;background: #fff;padding:5px 30px">
+                     <p style="font-size:14px">添加微信咨询</p>
+                     <el-image style="width:100px;height: 100px;margin-top:10px" :src="wxpic" fit="cover"></el-image>
+                 </div>
+                 <div class="flex-col-center" style="margin-top:10px;background: #fff;padding:5px 30px">
+                     <p style="font-size:14px">添加支付宝咨询</p>
+                     <el-image style="width:100px;height: 100px;margin-top:10px" :src="zfbpic" fit="cover"></el-image>
+                 </div>
+             </div>
+         </div>
+     </div>
+    <div class="desc">
+        <div class="left" style="">
+            <p style="font-weight: bold;font-size:16px;padding:10px 0;background: #ddf4df;color: #38b03f;">详情介绍</p>
+            <div v-html="picInfo.detailcontent"></div>
+        </div>
+        <div class="right" style="">
+            <p style="font-weight: bold;font-size:16px;padding:10px 0;background: #ddf4df;color: #38b03f;">热门推荐</p>
+            <div class="tuijian">
+                <router-link v-for="item in tuij_list" :to="'/picture/detail/专区/'+item.id" style="text-decoration: none;display:block;padding:0 40px;position:relative;margin-top:20px;cursor: pointer">
+                    <el-image style="height:280px;width:100%" :src="item.thumbnail" fit="cover"></el-image>
+                    <div style="text-align: start">
+                        <p style="color:#797979;font-size:16px;font-weight: 650">{{item.title}}</p>
+                        <p class="" style="color:#666666;font-size:14px;margin-top:5px">
+                            <span style="font-size: 20px;color:#ff0000">￥</span><span style="font-size: 20px;margin-right:10px;color:#ff0000">{{item.price}}</span>
+                            <el-tag v-if="item.picCount" style="margin-right:10px;" round type="primary" size="medium">{{item.picCount+'张图'}}</el-tag>
+                            <el-tag v-if="item.videoCount" style="margin-right:10px;" round type="primary" size="medium">{{item.videoCount+'个视频'}}</el-tag>
+                        </p>
+                    </div>
+                </router-link>
+            </div>
+            <el-row class="mini-tuijian" :gutter="10">
+                <el-col :span="12" v-for="item in tuij_list" >
+                    <router-link :to="'/picture/detail/专区/'+item.id" style="text-decoration: none;display:block;height:100%;position:relative;margin-top:10px;cursor: pointer">
+                        <el-image style="height:150px;width:100%" :src="item.thumbnail" fit="cover"></el-image>
+                        <div style="text-align: start">
+                            <p style="color:#797979;font-size:16px;font-weight: 650">{{item.title}}</p>
+                            <p class="" style="color:#666666;font-size:14px;margin-top:5px;height:32px">
+                                <span style="font-size: 14px;color:#ff0000">￥</span><span style="font-size: 16px;color:#ff0000">{{item.price}}</span>
+                                <el-tag v-if="item.picCount" style="" round type="primary" size="mini">{{item.picCount+'张图'}}</el-tag>
+                                <el-tag v-if="item.videoCount" style="" round type="primary" size="mini">{{item.videoCount+'个视频'}}</el-tag>
+                            </p>
+                        </div>
+                    </router-link>
+                </el-col>
+            </el-row>
+        </div>
+    </div>
+</div>

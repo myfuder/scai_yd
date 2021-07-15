@@ -1,0 +1,52 @@
+<div style="text-align: left;padding:20px ">
+    <el-button type="primary" @click="dialogFormVisible = true">新增分类</el-button>
+    <el-table
+        :data="tableData"
+        style="width: 100%">
+        <el-table-column
+            prop="name"
+            label="名称"
+            width="180">
+        </el-table-column>
+        <el-table-column
+            prop="img"
+            label="缩略图">
+            <template slot-scope="scope">
+                <el-image style="width:100px;height: 100px;" :src="scope.row.img" fit="cover"></el-image>
+            </template>
+        </el-table-column>
+        <el-table-column
+            prop="thumbnail"
+            label="图片路径">
+        </el-table-column>
+        <el-table-column
+            fixed="right"
+            label="操作"
+            width="100">
+            <template slot-scope="scope">
+                <el-button @click="remove(scope.row)" type="text" size="small">删除</el-button>
+                <el-button type="text" size="small" @click="edit(scope.row)">编辑</el-button>
+            </template>
+        </el-table-column>
+    </el-table>
+
+    <el-dialog title="新增分类" :visible.sync="dialogFormVisible">
+        <el-form :model="typeForm" label-width="80px" style="text-align: left">
+            <el-form-item label="类型名称">
+                <el-input style="width:300px;" v-model="typeForm.name"></el-input>
+            </el-form-item>
+            <el-form-item label="缩略图">
+                <el-upload class="upload-demo" :limit="1" list-type="picture" :on-error="uploadError" :on-success="uploadTypeSuccess"
+                           show-file-list drag :action="VUE_APP_BASE_URL+'/v1/picture/fileUpload'" multiple>
+                    <i class="el-icon-upload"></i>
+                    <div class="el-upload__text">将文件拖到此处，或<em>点击上传</em></div>
+                    <div class="el-upload__tip" slot="tip">只能上传jpg/png文件，且不超过500kb</div>
+                </el-upload>
+            </el-form-item>
+        </el-form>
+        <div slot="footer" class="dialog-footer">
+            <el-button @click="dialogFormVisible = false">取 消</el-button>
+            <el-button type="primary" @click="onSubmit">确 定</el-button>
+        </div>
+    </el-dialog>
+</div> 

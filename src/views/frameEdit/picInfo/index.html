@@ -1,0 +1,67 @@
+<div style="padding:40px 20px;text-align: left;">
+
+    <div class="between">
+        <el-button type="primary" @click="intent">新增分类</el-button>
+        <el-input  style="position:relative;width:300px" placeholder="请输入内容"
+                   prefix-icon="el-icon-search"
+                   v-model="input2">
+            <el-button slot="append" icon="el-icon-search" @click="bindInput"></el-button>
+        </el-input>
+    </div>
+
+
+    <el-table
+        :data="tableData"
+        style="width: 100%">
+        <el-table-column
+            prop="wpno"
+            label="网盘编号"
+            width="180">
+        </el-table-column>
+        <el-table-column
+            prop="title"
+            label="名称"
+            width="180">
+        </el-table-column>
+        <el-table-column
+            prop="img"
+            label="缩略图">
+            <template slot-scope="scope">
+                <el-image v-if="typeof scope.row.thumbnail != 'string'" v-for="img in scope.row.thumbnail" style="width:100px;height: 100px;" :src="img" fit="cover"></el-image>
+                <el-image v-if="typeof scope.row.thumbnail == 'string'" style="width:100px;height: 100px;" :src="scope.row.thumbnail" fit="cover"></el-image>
+            </template>
+        </el-table-column>
+        <el-table-column
+            prop="picCount"
+            label="图片数量">
+        </el-table-column>
+        <el-table-column
+            prop="picCount"
+            label="视频数量">
+        </el-table-column>
+        <el-table-column
+            prop="memory"
+            label="空间">
+        </el-table-column>
+        <el-table-column
+            prop="price"
+            label="售价">
+        </el-table-column>
+        <el-table-column
+            fixed="right"
+            label="操作"
+            width="100">
+            <template slot-scope="scope">
+                <el-button @click="remove(scope.row)" type="text" size="small">删除</el-button>
+                <el-button type="text" size="small" @click="intent(scope.row)">编辑</el-button>
+            </template>
+        </el-table-column>
+    </el-table>
+    <el-pagination style="padding:30px 0"
+                   :hide-on-single-page="true"
+                   :total="total"
+                   :page-size="pageSize"
+                   @current-change="handleCurrentChange"
+                   layout="prev, pager, next">
+    </el-pagination>
+</div>

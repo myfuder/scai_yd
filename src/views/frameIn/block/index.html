@@ -1,0 +1,19 @@
+<div class="flex-col-center">
+    <router-view :key="$route.fullPath" class="route" style=""></router-view>
+    <div class="flex foot" style="text-align: start;background: #F5F5F5;line-height:2;color:#6B6B6B;font-size: 14px">
+        <div class="flex">
+            <div class="first" style="">
+                <p>关于我们</p>
+                <el-link @click="intent('process')" type="info" size="small ">素材营地</el-link>
+            </div>
+            <div class="second" style="">
+                <p>常见问题</p>
+                <p>
+                    <el-link  @click="intent('buy')" type="info" size="small " style="margin-right:20px">如何购买</el-link>
+                    <el-link @click="intent('download')" type="info" size="small " >如何下载</el-link>
+                </p>
+            </div>
+        </div>
+
+    </div>
+</div>

@@ -1,0 +1,110 @@
+<div style="">
+    <el-carousel height="500px" :interval="5000" arrow="always" style="padding:10px;">
+        <el-carousel-item v-for="img in imgs" :key="img">
+            <el-image style="width:100%;height:100%"
+                :src="img"
+                fit="cover"></el-image>
+        </el-carousel-item>
+        <div class="search flex-center" style="width:100%;height:100%;color:#fff;z-index:2;position:absolute;background: rgba(0,0,0,0.2)">
+           <div style="margin:0 200px;">
+               <el-input  style="position:relative" placeholder="请输入内容"
+                         prefix-icon="el-icon-search"
+                         v-model="input2">
+                   <el-button slot="append" icon="el-icon-search" @click="search"></el-button>
+               </el-input>
+               <p style="font-size:16px;text-align: start;padding:10px 0">热搜:
+                   <el-link @click="search('日常')" color="honeydew" type="primary" >日常</el-link>
+                   <el-link @click="search('套图')" color="honeydew" type="primary">套图</el-link>
+                   <el-link @click="search('生活照')" color="honeydew" type="primary">生活照</el-link>
+               </p>
+           </div>
+        </div>
+    </el-carousel>
+    <div class="mini-search">
+        <el-input  style="position:relative" placeholder="请输入内容"
+                   v-model="input2">
+            <el-button slot="append" icon="el-icon-search" @click="search"></el-button>
+        </el-input>
+    </div>
+
+    <div class="header flex-space-between" style="">
+        <div class="flex">
+            <h3>素材营地</h3>
+            <el-breadcrumb separator-class="el-icon-arrow-right" style="margin-left:40px;margin-top:10px;cursor: pointer">
+                <el-breadcrumb-item :to="{ path: '/' }">首页</el-breadcrumb-item>
+            </el-breadcrumb>
+        </div>
+        <div class="flex-space-between" style="font-size: 14px;width:300px">
+            <el-link type="primary">登录</el-link>
+            <el-link type="success">加入我们</el-link>
+            <el-button round type="primary" size="medium " icon="el-icon-search">私人定制</el-button>
+        </div>
+    </div>
+    <div class="mini-header flex-space-between">
+        <div class="flex">
+            <h4>素材营地</h4>
+            <el-breadcrumb separator-class="el-icon-arrow-right" style="margin-left:20px;margin-top:10px;cursor: pointer">
+                <el-breadcrumb-item :to="{ path: '/' }">首页</el-breadcrumb-item>
+            </el-breadcrumb>
+        </div>
+        <el-dropdown>
+            <i class="el-icon-s-unfold" style="font-size:30px"></i>
+            <el-dropdown-menu slot="dropdown">
+                <el-dropdown-item icon="el-icon-user-solid">登录</el-dropdown-item>
+                <el-dropdown-item icon="el-icon-circle-plus">加入我们</el-dropdown-item>
+                <el-dropdown-item icon="el-icon-s-goods">私人定制</el-dropdown-item>
+            </el-dropdown-menu>
+        </el-dropdown>
+
+    </div>
+    <div class="ot" style="">
+        <p style="font-weight: bold;font-size:18px;padding:10px 0;background: #ddf4df;color: #38b03f;">专区</p>
+        <el-row class="zhaunqu" :gutter="20">
+            <el-col :span="8" v-for="item in menus" >
+                <router-link :to="'/picture/list/'+item.name" :key="$router.currentRoute.fullPath" style="display:block;height:100%;position:relative;margin-bottom:20px;cursor: pointer">
+                    <div class="flex-center" style="width:100%;height:100%;color:#fff;font-size:34px;font-weight:bold;z-index:2;position:absolute;background: rgba(0,0,0,0.2)">{{item.name}}</div>
+                    <el-image style="height:240px" :src="item.thumbnail" fit="cover"></el-image>
+                </router-link>
+            </el-col>
+        </el-row>
+        <el-row class="mini-zhaunqu" :gutter="10">
+            <el-col :span="12" v-for="item in menus" >
+                <router-link :to="'/picture/list/'+item.name" :key="$router.currentRoute.fullPath" style="display:block;height:100%;position:relative;margin-bottom:20px;cursor: pointer">
+                    <div class="flex-center" style="width:100%;height:100%;color:#fff;font-size:24px;font-weight:bold;z-index:2;position:absolute;background: rgba(0,0,0,0.2)">{{item.name}}</div>
+                    <el-image style="height:180px" :src="item.thumbnail" fit="cover"></el-image>
+                </router-link>
+            </el-col>
+        </el-row>
+        <p style="font-weight: bold;font-size:18px;padding:10px 0;background: #ddf4df;color: #38b03f;">热门推荐</p>
+        <el-row class="tuijian" :gutter="20">
+            <el-col :span="6" v-for="item in tuij_list" >
+                <router-link :to="'/picture/detail/专区/'+item.id" style="text-decoration: none;display:block;height:100%;position:relative;margin-bottom:20px;cursor: pointer">
+                    <el-image style="height:280px;width:100%" :src="item.thumbnail" fit="cover"></el-image>
+                    <div style="text-align: start">
+                        <p style="color:#797979;font-size:16px;font-weight: 650">{{item.title}}</p>
+                        <p class="" style="color:#666666;font-size:14px;margin-top:5px;height:32px">
+                            <span style="font-size: 20px;color:#ff0000">￥</span><span style="font-size: 24px;margin-right:10px;color:#ff0000">{{item.price}}</span>
+                            <el-tag v-if="item.picCount" style="margin-right:10px;" round type="primary" size="small">{{item.picCount+'张图'}}</el-tag>
+                            <el-tag v-if="item.videoCount" style="margin-right:10px;" round type="primary" size="small">{{item.videoCount+'个视频'}}</el-tag>
+                        </p>
+                    </div>
+                </router-link>
+            </el-col>
+        </el-row>
+        <el-row class="mini-tuijian" :gutter="10">
+            <el-col :span="12" v-for="item in tuij_list" >
+                <router-link :to="'/picture/detail/专区/'+item.id" style="text-decoration: none;display:block;height:100%;position:relative;margin-bottom:20px;cursor: pointer">
+                    <el-image style="height:150px;width:100%" :src="item.thumbnail" fit="cover"></el-image>
+                    <div style="text-align: start">
+                        <p style="color:#797979;font-size:16px;font-weight: 650">{{item.title}}</p>
+                        <p class="flex" style="color:#666666;font-size:14px;margin-top:5px;height:32px">
+                            <span style="font-size: 14px;color:#ff0000">￥</span><span style="font-size: 16px;margin-right:5px;color:#ff0000">{{item.price}}</span>
+                            <el-tag v-if="item.picCount" style="margin-right:5px;" round type="primary" size="mini">{{item.picCount+'张图'}}</el-tag>
+                            <el-tag v-if="item.videoCount" style="margin-right:5px;" round type="primary" size="mini">{{item.videoCount+'个视频'}}</el-tag>
+                        </p>
+                    </div>
+                </router-link>
+            </el-col>
+        </el-row>
+    </div>
+</div>

@@ -1,0 +1,37 @@
+@media screen and (max-width: 960px) {
+  .route {
+    width: 100%;
+  }
+  .first {
+    border-right: 1px solid #cccccc;
+    padding: 0 20px;
+  }
+  .second {
+    padding: 0 20px;
+    text-align: left;
+  }
+  .foot {
+    width: 100%;
+    padding: 20px 0;
+  }
+}
+@media screen and (min-width: 960px) {
+  .route {
+    width: 1200px;
+    text-align: center;
+    padding: 20px 0;
+  }
+  .first {
+    border-right: 1px solid #cccccc;
+    padding: 0 80px;
+  }
+  .second {
+    padding: 0 80px;
+  }
+  .foot {
+    width: 1200px;
+    text-align: center;
+    padding: 20px 0;
+  }
+}
+/*# sourceMappingURL=index.css.map */
